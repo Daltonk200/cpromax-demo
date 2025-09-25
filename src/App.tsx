@@ -15,11 +15,6 @@ function App() {
     initializeStorage();
   }, []);
 
-  // Simple navigation handler
-  const handleNavigate = (path: string) => {
-    window.location.hash = path;
-  };
-
   // Handle package selection
   const handlePackageSelect = (packageId: string) => {
     setSelectedPackage(packageId);
@@ -48,7 +43,7 @@ function App() {
           {/* Landing Page */}
           <Route 
             path="/" 
-            element={<LandingPage onNavigate={handleNavigate} />} 
+            element={<LandingPage />} 
           />
           
           {/* Package Selection */}
@@ -56,7 +51,6 @@ function App() {
             path="/packages" 
             element={
               <PackageSelection 
-                onNavigate={handleNavigate}
                 onPackageSelect={handlePackageSelect}
               />
             } 
@@ -67,7 +61,6 @@ function App() {
             path="/payment" 
             element={
               <PaymentSimulation 
-                onNavigate={handleNavigate}
                 selectedPackage={selectedPackage}
               />
             } 
@@ -78,7 +71,7 @@ function App() {
             path="/dashboard" 
             element={
               <ProtectedRoute>
-                <DashboardLayout onNavigate={handleNavigate} />
+                <DashboardLayout />
               </ProtectedRoute>
             } 
           />
