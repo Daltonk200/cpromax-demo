@@ -207,7 +207,7 @@ const AnalyticsAndReviews: React.FC = () => {
         <h3 className="text-lg font-semibold text-neutral-900 mb-4">
           Performance Trends
         </h3>
-        <div className="h-64 bg-gradient-to-br from-neutral-50 to-neutral-100 rounded-lg flex items-center justify-center">
+        <div className="h-64 bg-gradient-to-br from-neutral-50 to-neutral-100  flex items-center justify-center">
           <div className="text-center">
             <BarChart3 className="h-12 w-12 text-neutral-300 mx-auto mb-3" />
             <h4 className="font-medium text-neutral-600 mb-2">
@@ -248,7 +248,7 @@ const AnalyticsAndReviews: React.FC = () => {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.6 + index * 0.1 }}
-              className="border border-neutral-200 rounded-lg p-4"
+              className="border border-neutral-200  p-4"
             >
               <div className="flex items-start justify-between mb-3">
                 <div>
@@ -277,7 +277,7 @@ const AnalyticsAndReviews: React.FC = () => {
         </div>
 
         {/* Coming Soon Notice */}
-        <div className="mt-6 p-4 bg-primary-50 border border-primary-200 rounded-lg">
+        <div className="mt-6 p-4 bg-primary-50 border border-primary-200 ">
           <div className="flex items-center space-x-2 mb-2">
             <Star className="h-5 w-5 text-primary-600" />
             <span className="font-medium text-primary-900">Review System Coming Soon</span>
@@ -300,7 +300,7 @@ const AnalyticsAndReviews: React.FC = () => {
           Insights & Recommendations
         </h3>
         <div className="space-y-4">
-          <div className="flex items-start space-x-3 p-4 bg-blue-50 rounded-lg">
+          <div className="flex items-start space-x-3 p-4 bg-blue-50 ">
             <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
               <TrendingUp className="h-4 w-4 text-white" />
             </div>
@@ -314,7 +314,7 @@ const AnalyticsAndReviews: React.FC = () => {
             </div>
           </div>
 
-          <div className="flex items-start space-x-3 p-4 bg-green-50 rounded-lg">
+          <div className="flex items-start space-x-3 p-4 bg-green-50 ">
             <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
               <MessageCircle className="h-4 w-4 text-white" />
             </div>
@@ -328,7 +328,7 @@ const AnalyticsAndReviews: React.FC = () => {
             </div>
           </div>
 
-          <div className="flex items-start space-x-3 p-4 bg-yellow-50 rounded-lg">
+          <div className="flex items-start space-x-3 p-4 bg-yellow-50 ">
             <div className="w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center flex-shrink-0">
               <Star className="h-4 w-4 text-white" />
             </div>

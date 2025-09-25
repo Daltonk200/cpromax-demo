@@ -60,7 +60,7 @@ const PackageSelection: React.FC<PackageSelectionProps> = ({
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1, duration: 0.5 }}
-              className={`relative bg-white rounded-2xl shadow-lg border-2 transition-all duration-300 ${
+              className={`relative bg-white  shadow-lg border-2 transition-all duration-300 ${
                 pkg.popular
                   ? 'border-primary-500 transform scale-105'
                   : 'border-neutral-200 hover:border-primary-300'
@@ -168,7 +168,7 @@ const PackageSelection: React.FC<PackageSelectionProps> = ({
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95, y: 20 }}
                 onClick={(e) => e.stopPropagation()}
-                className="bg-white rounded-2xl shadow-2xl w-full max-w-md mx-auto"
+                className="bg-white  shadow-2xl w-full max-w-md mx-auto"
               >
                 {/* Header */}
                 <div className="flex items-center justify-between p-6 border-b border-neutral-200">
@@ -198,7 +198,7 @@ const PackageSelection: React.FC<PackageSelectionProps> = ({
                     </div>
                   </div>
 
-                  <div className="bg-neutral-50 rounded-lg p-4 mb-6">
+                  <div className="bg-neutral-50  p-4 mb-6">
                     <h4 className="font-medium text-neutral-900 mb-3">
                       Package includes:
                     </h4>
@@ -220,7 +220,7 @@ const PackageSelection: React.FC<PackageSelectionProps> = ({
                   <div className="flex space-x-3">
                     <button
                       onClick={handleCloseModal}
-                      className="flex-1 px-4 py-2 border border-neutral-300 text-neutral-700 rounded-lg hover:bg-neutral-50 transition-colors"
+                      className="flex-1 px-4 py-2 border border-neutral-300 text-neutral-700  hover:bg-neutral-50 transition-colors"
                     >
                       Cancel
                     </button>
@@ -228,7 +228,7 @@ const PackageSelection: React.FC<PackageSelectionProps> = ({
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                       onClick={handleConfirmSelection}
-                      className="flex-1 px-4 py-2 bg-primary-500 text-white rounded-lg hover:bg-primary-600 transition-colors flex items-center justify-center space-x-2"
+                      className="flex-1 px-4 py-2 bg-primary-500 text-white  hover:bg-primary-600 transition-colors flex items-center justify-center space-x-2"
                     >
                       <span>Continue</span>
                       <ArrowRight className="h-4 w-4" />

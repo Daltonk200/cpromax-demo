@@ -140,7 +140,7 @@ const RegistrationModal: React.FC<RegistrationModalProps> = ({
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               onClick={(e) => e.stopPropagation()}
-              className="bg-white rounded-2xl shadow-2xl w-full max-w-md mx-auto"
+              className="bg-white  shadow-2xl w-full max-w-md mx-auto"
             >
               {/* Header */}
               <div className="flex items-center justify-between p-6 border-b border-neutral-200">
@@ -179,7 +179,7 @@ const RegistrationModal: React.FC<RegistrationModalProps> = ({
                       type="text"
                       value={formData.businessName}
                       onChange={(e) => handleInputChange('businessName', e.target.value)}
-                      className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-white text-neutral-900 placeholder-neutral-500 ${
+                      className={`w-full pl-10 pr-4 py-3 border  focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-white text-neutral-900 placeholder-neutral-500 ${
                         errors.businessName ? 'border-red-300' : 'border-neutral-300'
                       }`}
                       placeholder="Enter your business name"
@@ -202,7 +202,7 @@ const RegistrationModal: React.FC<RegistrationModalProps> = ({
                       type="email"
                       value={formData.email}
                       onChange={(e) => handleInputChange('email', e.target.value)}
-                      className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-white text-neutral-900 placeholder-neutral-500 ${
+                      className={`w-full pl-10 pr-4 py-3 border  focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-white text-neutral-900 placeholder-neutral-500 ${
                         errors.email ? 'border-red-300' : 'border-neutral-300'
                       }`}
                       placeholder="Enter your email address"
@@ -225,7 +225,7 @@ const RegistrationModal: React.FC<RegistrationModalProps> = ({
                       type="tel"
                       value={formData.phone}
                       onChange={(e) => handleInputChange('phone', e.target.value)}
-                      className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-white text-neutral-900 placeholder-neutral-500 ${
+                      className={`w-full pl-10 pr-4 py-3 border  focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-white text-neutral-900 placeholder-neutral-500 ${
                         errors.phone ? 'border-red-300' : 'border-neutral-300'
                       }`}
                       placeholder="Enter your phone number"
@@ -248,7 +248,7 @@ const RegistrationModal: React.FC<RegistrationModalProps> = ({
                       type="password"
                       value={formData.password}
                       onChange={(e) => handleInputChange('password', e.target.value)}
-                      className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-white text-neutral-900 placeholder-neutral-500 ${
+                      className={`w-full pl-10 pr-4 py-3 border  focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-white text-neutral-900 placeholder-neutral-500 ${
                         errors.password ? 'border-red-300' : 'border-neutral-300'
                       }`}
                       placeholder="Create a password"
@@ -270,7 +270,7 @@ const RegistrationModal: React.FC<RegistrationModalProps> = ({
                     <select
                       value={formData.country}
                       onChange={(e) => handleInputChange('country', e.target.value)}
-                      className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-white text-neutral-900 ${
+                      className={`w-full pl-10 pr-4 py-3 border  focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-white text-neutral-900 ${
                         errors.country ? 'border-red-300' : 'border-neutral-300'
                       }`}
                       disabled={isSubmitting}
@@ -294,7 +294,7 @@ const RegistrationModal: React.FC<RegistrationModalProps> = ({
                     disabled={isSubmitting}
                     whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
                     whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
-                    className="w-full bg-primary-500 text-white py-3 px-4 rounded-lg font-semibold hover:bg-primary-600 focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full bg-primary-500 text-white py-3 px-4  font-semibold hover:bg-primary-600 focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {isSubmitting ? (
                       <div className="flex items-center justify-center space-x-2">

@@ -38,7 +38,7 @@ const DashboardLayout: React.FC = () => {
           </h1>
           <button
             onClick={() => navigate('/')}
-            className="px-6 py-3 bg-primary-500 text-white rounded-lg hover:bg-primary-600 transition-colors"
+            className="px-6 py-3 bg-primary-500 text-white  hover:bg-primary-600 transition-colors"
           >
             Go to Home
           </button>
@@ -215,7 +215,7 @@ const DashboardLayout: React.FC = () => {
         </div>
         
         {currentUser.package !== 'premium' && (
-          <div className="mt-6 p-4 bg-primary-50 rounded-lg">
+          <div className="mt-6 p-4 bg-primary-50 ">
             <div className="flex items-center justify-between">
               <div>
                 <h3 className="font-medium text-primary-900">Upgrade Your Plan</h3>
@@ -225,7 +225,7 @@ const DashboardLayout: React.FC = () => {
               </div>
               <button
                 onClick={handleUpgradePackage}
-                className="px-4 py-2 bg-primary-500 text-white rounded-lg hover:bg-primary-600 transition-colors"
+                className="px-4 py-2 bg-primary-500 text-white  hover:bg-primary-600 transition-colors"
               >
                 Upgrade
               </button>
@@ -247,7 +247,7 @@ const DashboardLayout: React.FC = () => {
         <div className="grid md:grid-cols-2 gap-4">
           <button
             onClick={() => setActiveSection('profile')}
-            className="p-4 border border-neutral-200 rounded-lg hover:border-primary-300 transition-all text-left"
+            className="p-4 border border-neutral-200  hover:border-primary-300 transition-all text-left"
           >
             <div className="flex items-center space-x-3">
               <Building2 className="h-8 w-8 text-primary-500" />
@@ -262,7 +262,7 @@ const DashboardLayout: React.FC = () => {
           
           <button
             onClick={() => setActiveSection('services')}
-            className="p-4 border border-neutral-200 rounded-lg hover:border-primary-300 transition-all text-left"
+            className="p-4 border border-neutral-200  hover:border-primary-300 transition-all text-left"
           >
             <div className="flex items-center space-x-3">
               <Wrench className="h-8 w-8 text-blue-500" />
@@ -417,7 +417,7 @@ const DashboardLayout: React.FC = () => {
                 <div className="p-6 border-t border-neutral-200">
                   <button
                     onClick={handleLogout}
-                    className="w-full flex items-center space-x-3 px-3 py-2 text-neutral-700 hover:bg-red-50 hover:text-red-600 rounded-lg transition-all"
+                    className="w-full flex items-center space-x-3 px-3 py-2 text-neutral-700 hover:bg-red-50 hover:text-red-600  transition-all"
                   >
                     <LogOut className="h-5 w-5" />
                     <span>Logout</span>

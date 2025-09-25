@@ -159,7 +159,7 @@ const PaymentSimulation: React.FC<PaymentSimulationProps> = ({
           </h1>
           <button
             onClick={() => navigate('/')}
-            className="px-6 py-3 bg-primary-500 text-white rounded-lg hover:bg-primary-600 transition-colors"
+            className="px-6 py-3 bg-primary-500 text-white  hover:bg-primary-600 transition-colors"
           >
             Go to Registration
           </button>
@@ -189,7 +189,7 @@ const PaymentSimulation: React.FC<PaymentSimulationProps> = ({
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
-            className="bg-white rounded-2xl shadow-lg p-8"
+            className="bg-white  shadow-lg p-8"
           >
             <h2 className="text-xl font-semibold text-neutral-900 mb-6">
               Order Summary
@@ -213,7 +213,7 @@ const PaymentSimulation: React.FC<PaymentSimulationProps> = ({
                 <span className="text-green-600">Free</span>
               </div>
               
-              <div className="flex justify-between items-center py-4 bg-primary-50 rounded-lg px-4">
+              <div className="flex justify-between items-center py-4 bg-primary-50  px-4">
                 <span className="text-lg font-semibold text-neutral-900">Total</span>
                 <span className="text-xl font-bold text-primary-600">
                   {formatCurrency(getPackagePrice(selectedPackage))}
@@ -222,7 +222,7 @@ const PaymentSimulation: React.FC<PaymentSimulationProps> = ({
             </div>
 
             {/* Security Notice */}
-            <div className="mt-8 p-4 bg-neutral-50 rounded-lg">
+            <div className="mt-8 p-4 bg-neutral-50 ">
               <div className="flex items-center space-x-2 mb-2">
                 <Shield className="h-5 w-5 text-primary-500" />
                 <span className="font-medium text-neutral-900">Secure Payment</span>
@@ -237,7 +237,7 @@ const PaymentSimulation: React.FC<PaymentSimulationProps> = ({
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
-            className="bg-white rounded-2xl shadow-lg p-8"
+            className="bg-white  shadow-lg p-8"
           >
             <h2 className="text-xl font-semibold text-neutral-900 mb-6">
               Choose Payment Method
@@ -269,7 +269,7 @@ const PaymentSimulation: React.FC<PaymentSimulationProps> = ({
             </div>
 
             {/* Demo Notice */}
-            <div className="mt-8 p-4 bg-amber-50 border border-amber-200 rounded-lg">
+            <div className="mt-8 p-4 bg-amber-50 border border-amber-200 ">
               <div className="flex items-center space-x-2 mb-2">
                 <Clock className="h-5 w-5 text-amber-600" />
                 <span className="font-medium text-amber-900">Demo Mode</span>
@@ -300,7 +300,7 @@ const PaymentSimulation: React.FC<PaymentSimulationProps> = ({
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95, y: 20 }}
                 onClick={(e) => e.stopPropagation()}
-                className="bg-white rounded-2xl shadow-2xl w-full max-w-md mx-auto"
+                className="bg-white  shadow-2xl w-full max-w-md mx-auto"
               >
                 {!paymentSuccess ? (
                   <>
@@ -333,7 +333,7 @@ const PaymentSimulation: React.FC<PaymentSimulationProps> = ({
                         </div>
                       </div>
 
-                      <div className="bg-neutral-50 rounded-lg p-4 mb-6">
+                      <div className="bg-neutral-50  p-4 mb-6">
                         <p className="text-sm text-neutral-600 text-center">
                           {selectedMethod.id.includes('momo') || selectedMethod.id.includes('money')
                             ? 'You will receive a prompt on your mobile device to complete the payment.'

@@ -142,7 +142,7 @@ const ServiceCatalog: React.FC = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={handleAddService}
-            className="flex items-center space-x-2 px-4 py-2 bg-primary-500 text-white rounded-lg hover:bg-primary-600 transition-colors"
+            className="flex items-center space-x-2 px-4 py-2 bg-primary-500 text-white  hover:bg-primary-600 transition-colors"
           >
             <PlusCircle className="h-5 w-5" />
             <span>Add Service</span>
@@ -168,7 +168,7 @@ const ServiceCatalog: React.FC = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={handleAddService}
-            className="px-6 py-3 bg-primary-500 text-white rounded-lg hover:bg-primary-600 transition-colors"
+            className="px-6 py-3 bg-primary-500 text-white  hover:bg-primary-600 transition-colors"
           >
             Add Your First Service
           </motion.button>
@@ -228,7 +228,7 @@ const ServiceCatalog: React.FC = () => {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={() => handleEditService(service)}
-                    className="flex-1 flex items-center justify-center space-x-1 px-3 py-2 bg-neutral-100 text-neutral-700 rounded-lg hover:bg-neutral-200 transition-colors"
+                    className="flex-1 flex items-center justify-center space-x-1 px-3 py-2 bg-neutral-100 text-neutral-700  hover:bg-neutral-200 transition-colors"
                   >
                     <Edit className="h-4 w-4" />
                     <span>Edit</span>
@@ -237,7 +237,7 @@ const ServiceCatalog: React.FC = () => {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={() => handleDeleteService(service.id)}
-                    className="flex items-center justify-center px-3 py-2 bg-red-100 text-red-700 rounded-lg hover:bg-red-200 transition-colors"
+                    className="flex items-center justify-center px-3 py-2 bg-red-100 text-red-700  hover:bg-red-200 transition-colors"
                   >
                     <Trash2 className="h-4 w-4" />
                   </motion.button>
@@ -266,7 +266,7 @@ const ServiceCatalog: React.FC = () => {
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95, y: 20 }}
                 onClick={(e) => e.stopPropagation()}
-                className="bg-white rounded-2xl shadow-2xl w-full max-w-lg mx-auto max-h-[90vh] overflow-y-auto"
+                className="bg-white  shadow-2xl w-full max-w-lg mx-auto max-h-[90vh] overflow-y-auto"
               >
                 {/* Header */}
                 <div className="flex items-center justify-between p-6 border-b border-neutral-200">
@@ -292,7 +292,7 @@ const ServiceCatalog: React.FC = () => {
                       type="text"
                       value={serviceForm.name}
                       onChange={(e) => handleInputChange('name', e.target.value)}
-                      className="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-white text-neutral-900 placeholder-neutral-500"
+                      className="w-full px-4 py-3 border border-neutral-300  focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-white text-neutral-900 placeholder-neutral-500"
                       placeholder="Enter service name"
                     />
                   </div>
@@ -305,7 +305,7 @@ const ServiceCatalog: React.FC = () => {
                     <select
                       value={serviceForm.category}
                       onChange={(e) => handleInputChange('category', e.target.value)}
-                      className="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-white text-neutral-900"
+                      className="w-full px-4 py-3 border border-neutral-300  focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-white text-neutral-900"
                     >
                       {SERVICE_CATEGORIES.map((category) => (
                         <option key={category} value={category}>
@@ -324,7 +324,7 @@ const ServiceCatalog: React.FC = () => {
                       value={serviceForm.description}
                       onChange={(e) => handleInputChange('description', e.target.value)}
                       rows={4}
-                      className="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-white text-neutral-900 placeholder-neutral-500"
+                      className="w-full px-4 py-3 border border-neutral-300  focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-white text-neutral-900 placeholder-neutral-500"
                       placeholder="Describe your service in detail..."
                     />
                   </div>
@@ -340,7 +340,7 @@ const ServiceCatalog: React.FC = () => {
                         type="text"
                         value={serviceForm.price}
                         onChange={(e) => handleInputChange('price', e.target.value)}
-                        className="w-full pl-10 pr-4 py-3 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-white text-neutral-900 placeholder-neutral-500"
+                        className="w-full pl-10 pr-4 py-3 border border-neutral-300  focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-white text-neutral-900 placeholder-neutral-500"
                         placeholder="e.g., From 50,000 FCFA"
                       />
                     </div>
@@ -352,7 +352,7 @@ const ServiceCatalog: React.FC = () => {
                       Service Photo
                     </label>
                     <div className="flex items-center space-x-4">
-                      <div className="w-20 h-20 bg-neutral-100 rounded-lg flex items-center justify-center overflow-hidden">
+                      <div className="w-20 h-20 bg-neutral-100  flex items-center justify-center overflow-hidden">
                         {serviceForm.photoUrl ? (
                           <img
                             src={serviceForm.photoUrl}
@@ -373,7 +373,7 @@ const ServiceCatalog: React.FC = () => {
                         />
                         <label
                           htmlFor="photo-upload"
-                          className="cursor-pointer px-4 py-2 bg-primary-100 text-primary-700 rounded-lg hover:bg-primary-200 transition-colors"
+                          className="cursor-pointer px-4 py-2 bg-primary-100 text-primary-700  hover:bg-primary-200 transition-colors"
                         >
                           Upload Photo
                         </label>
@@ -388,7 +388,7 @@ const ServiceCatalog: React.FC = () => {
                   <div className="flex space-x-3 pt-6">
                     <button
                       onClick={handleCloseModal}
-                      className="flex-1 px-4 py-2 border border-neutral-300 text-neutral-700 rounded-lg hover:bg-neutral-50 transition-colors"
+                      className="flex-1 px-4 py-2 border border-neutral-300 text-neutral-700  hover:bg-neutral-50 transition-colors"
                     >
                       Cancel
                     </button>
@@ -396,7 +396,7 @@ const ServiceCatalog: React.FC = () => {
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                       onClick={handleSaveService}
-                      className="flex-1 px-4 py-2 bg-primary-500 text-white rounded-lg hover:bg-primary-600 transition-colors flex items-center justify-center space-x-2"
+                      className="flex-1 px-4 py-2 bg-primary-500 text-white  hover:bg-primary-600 transition-colors flex items-center justify-center space-x-2"
                     >
                       <Save className="h-4 w-4" />
                       <span>{editingService ? 'Update' : 'Add'} Service</span>

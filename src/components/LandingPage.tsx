@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Building2, Search, UserPlus, Menu, X, Star, ArrowRight } from 'lucide-react';
+import { Building2, Search, UserPlus, Menu, X, Star, ArrowRight, Mail, Target, Lightbulb } from 'lucide-react';
 import RegistrationModal from './RegistrationModal';
 
 const LandingPage: React.FC = () => {
@@ -54,7 +54,7 @@ const LandingPage: React.FC = () => {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   onClick={handleLogin}
-                  className="px-6 py-2.5 text-white font-medium hover:bg-white/10 rounded-lg transition-all"
+                  className="px-6 py-2.5 text-white font-medium hover:bg-white/10 transition-all"
                 >
                   Sign In
                 </motion.button>
@@ -62,7 +62,7 @@ const LandingPage: React.FC = () => {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   onClick={handleJoinBusiness}
-                  className="px-6 py-2.5 bg-primary-500 text-white rounded-lg hover:bg-primary-600 transition-all font-medium"
+                  className="px-6 py-2.5 bg-primary-500 text-white hover:bg-primary-600 transition-all font-medium"
                 >
                   Get Started
                 </motion.button>
@@ -73,7 +73,7 @@ const LandingPage: React.FC = () => {
             <div className="md:hidden">
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="p-2 text-white hover:bg-white/10 rounded-lg transition-colors"
+                className="p-2 text-white hover:bg-white/10  transition-colors"
               >
                 {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
               </button>
@@ -85,7 +85,7 @@ const LandingPage: React.FC = () => {
             <motion.div
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="md:hidden bg-black/20 backdrop-blur-sm rounded-lg mt-2 p-4"
+              className="md:hidden bg-black/20 backdrop-blur-sm  mt-2 p-4"
             >
               <div className="flex flex-col space-y-4">
                 <a href="#features" className="px-4 py-2 text-white/80 hover:text-primary-400 transition-colors">
@@ -100,13 +100,13 @@ const LandingPage: React.FC = () => {
                 <div className="pt-4 border-t border-white/20 flex flex-col space-y-3">
                   <button
                     onClick={handleLogin}
-                    className="px-4 py-2 text-left text-white hover:bg-white/10 rounded-lg transition-colors"
+                    className="px-4 py-2 text-left text-white hover:bg-white/10 transition-colors"
                   >
                     Sign In
                   </button>
                   <button
                     onClick={handleJoinBusiness}
-                    className="px-4 py-2 bg-primary-500 text-white rounded-lg hover:bg-primary-600 transition-colors text-left"
+                    className="px-4 py-2 bg-primary-500 text-white hover:bg-primary-600 transition-colors text-left"
                   >
                     Get Started
                   </button>
@@ -201,7 +201,7 @@ const LandingPage: React.FC = () => {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={handleJoinBusiness}
-                  className="px-8 py-4 bg-primary-500 text-white font-semibold text-lg rounded-lg hover:bg-primary-600 transition-all shadow-xl"
+                  className="px-8 py-4 bg-primary-500 text-white font-semibold text-lg  hover:bg-primary-600 transition-all shadow-xl"
                 >
                   Find Services
                 </motion.button>
@@ -259,10 +259,10 @@ const LandingPage: React.FC = () => {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
                 whileHover={{ y: -5 }}
-                className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-300"
+                className="bg-white  shadow-lg border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-300"
               >
                 <div className="p-8 text-center">
-                  <div className="w-16 h-16 bg-primary-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                  <div className="w-16 h-16 bg-primary-100  flex items-center justify-center mx-auto mb-6">
                     <feature.icon className="h-8 w-8 text-primary-500" />
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-4">
@@ -326,7 +326,7 @@ const LandingPage: React.FC = () => {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
                 whileHover={{ scale: 1.02, y: -5 }}
-                className="relative bg-white rounded-2xl shadow-lg overflow-hidden cursor-pointer group hover:shadow-xl transition-all duration-300"
+                className="relative bg-white  shadow-lg overflow-hidden cursor-pointer group hover:shadow-xl transition-all duration-300"
               >
                 <div className="h-48 overflow-hidden">
                   <img 
@@ -405,7 +405,7 @@ const LandingPage: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.5 }}
               viewport={{ once: true }}
-              className="inline-flex items-center space-x-3 px-10 py-5 bg-white text-primary-600 rounded-2xl hover:bg-gray-50 transition-all shadow-2xl hover:shadow-3xl font-bold text-lg group"
+              className="inline-flex items-center space-x-3 px-10 py-5 bg-white text-primary-600  hover:bg-gray-50 transition-all shadow-2xl hover:shadow-3xl font-bold text-lg group"
             >
               <span>Get Started Today</span>
               <ArrowRight className="h-6 w-6 group-hover:translate-x-1 transition-transform" />
@@ -494,7 +494,7 @@ const LandingPage: React.FC = () => {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
                 whileHover={{ y: -5 }}
-                className="bg-white rounded-2xl shadow-lg border border-gray-100 p-8 hover:shadow-xl transition-all duration-300"
+                className="bg-white  shadow-lg border border-gray-100 p-8 hover:shadow-xl transition-all duration-300"
               >
                 {/* Rating Stars */}
                 <div className="flex justify-center mb-6">
@@ -643,36 +643,41 @@ const LandingPage: React.FC = () => {
             >
               {[
                 {
-                  icon: '📧',
+                  icon: Mail,
                   title: 'Weekly Updates',
                   description: 'Get curated industry news and platform updates'
                 },
                 {
-                  icon: '🎯',
+                  icon: Target,
                   title: 'Exclusive Opportunities',
                   description: 'First access to premium job listings and partnerships'
                 },
                 {
-                  icon: '💡',
+                  icon: Lightbulb,
                   title: 'Expert Insights',
                   description: 'Tips and strategies from successful business owners'
                 }
-              ].map((benefit, index) => (
-                <motion.div
-                  key={index}
-                  className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20"
-                  whileHover={{ y: -5, scale: 1.02 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <div className="text-3xl mb-4">{benefit.icon}</div>
-                  <h3 className="text-white font-semibold text-lg mb-2">
-                    {benefit.title}
-                  </h3>
-                  <p className="text-white/80 text-sm">
-                    {benefit.description}
-                  </p>
-                </motion.div>
-              ))}
+              ].map((benefit, index) => {
+                const IconComponent = benefit.icon;
+                return (
+                  <motion.div
+                    key={index}
+                    className="bg-white/10 backdrop-blur-sm p-6 border border-white/20"
+                    whileHover={{ y: -5, scale: 1.02 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <div className="mb-4">
+                      <IconComponent className="h-8 w-8 text-primary-400" />
+                    </div>
+                    <h3 className="text-white font-semibold text-lg mb-2">
+                      {benefit.title}
+                    </h3>
+                    <p className="text-white/80 text-sm">
+                      {benefit.description}
+                    </p>
+                  </motion.div>
+                );
+              })}
             </motion.div>
           </motion.div>
         </div>
