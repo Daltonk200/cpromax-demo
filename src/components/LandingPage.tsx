@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Building2, Search, UserPlus, Menu, X, Star, Users, Shield, ArrowRight, CheckCircle } from 'lucide-react';
+import { Building2, Search, UserPlus, Menu, X, Star, ArrowRight } from 'lucide-react';
 import RegistrationModal from './RegistrationModal';
 
 const LandingPage: React.FC = () => {
@@ -11,11 +11,6 @@ const LandingPage: React.FC = () => {
 
   const handleJoinBusiness = () => {
     setIsRegistrationOpen(true);
-  };
-
-  const handleFindServices = () => {
-    // Placeholder for services page
-    alert('Find Services feature coming soon!');
   };
 
   const handleLogin = () => {
