@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { Building2, Search, UserPlus, Menu, X, Star, ArrowRight, Mail, Target, Lightbulb } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Building2, Search, UserPlus, Menu, X, Star, ArrowRight, Mail, Target, Lightbulb, User, Briefcase, Check } from 'lucide-react';
 import RegistrationModal from './RegistrationModal';
 
 const LandingPage: React.FC = () => {
   const [isRegistrationOpen, setIsRegistrationOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [selectedUserType, setSelectedUserType] = useState<'individual' | 'business' | null>(null);
+  const [showPricingModal, setShowPricingModal] = useState(false);
   const navigate = useNavigate();
 
   const handleJoinBusiness = () => {
@@ -17,6 +19,123 @@ const LandingPage: React.FC = () => {
     // Placeholder for login functionality
     alert('Login feature coming soon!');
   };
+
+  const handleViewPlans = (userType: 'individual' | 'business') => {
+    setSelectedUserType(userType);
+    setShowPricingModal(true);
+  };
+
+  const handleSelectPlan = (planType: 'basic' | 'professional' | 'premium') => {
+    if (!selectedUserType) return;
+
+    // Save user type and plan selection to localStorage
+    const userPlanData = {
+      userType: selectedUserType,
+      selectedPlan: planType,
+      subscriptionStatus: 'pending' as const
+    };
+    
+    localStorage.setItem('userPlanData', JSON.stringify(userPlanData));
+    
+    // Close modal and proceed to registration
+    setShowPricingModal(false);
+    setIsRegistrationOpen(true);
+  };
+
+  const individualPlans = [
+    {
+      id: 'basic' as const,
+      name: 'Basic',
+      price: '10,000',
+      period: 'month', 
+      description: 'Perfect for getting started',
+      features: [
+        'Profile creation',
+        '1 service listing',
+        'Appear in search results',
+        'Basic customer support'
+      ]
+    },
+    {
+      id: 'professional' as const,
+      name: 'Professional',
+      price: '18,000',
+      period: 'month',
+      description: 'Most popular for freelancers',
+      popular: true,
+      features: [
+        'Everything in Basic',
+        '1 service listing',
+        'Priority listing',
+        'Reviews enabled',
+        'Email support'
+      ]
+    },
+    {
+      id: 'premium' as const,
+      name: 'Premium',
+      price: '30,000',
+      period: 'month',
+      description: 'For established professionals',
+      features: [
+        'Everything in Professional',
+        '1 service listing',
+        'Featured badge',
+        'Analytics dashboard',
+        'WhatsApp integration',
+        'Priority support'
+      ]
+    }
+  ];
+
+  const businessPlans = [
+    {
+      id: 'basic' as const,
+      name: 'Basic',
+      price: '25,000',
+      period: 'month',
+      description: 'Great for small businesses',
+      features: [
+        'Profile creation',
+        'Unlimited services',
+        'Appear in search results',
+        'Team management',
+        'Basic support'
+      ]
+    },
+    {
+      id: 'professional' as const,
+      name: 'Professional',
+      price: '40,000',
+      period: 'month',
+      description: 'Most popular for businesses',
+      popular: true,
+      features: [
+        'Everything in Basic',
+        'Unlimited services',
+        'Priority listing',
+        'Reviews enabled',
+        'WhatsApp integration',
+        'Advanced analytics'
+      ]
+    },
+    {
+      id: 'premium' as const,
+      name: 'Premium',
+      price: '70,000',
+      period: 'month',
+      description: 'For growing companies',
+      features: [
+        'Everything in Professional',
+        'Unlimited services',
+        'Featured badge',
+        'Dedicated support',
+        'API access',
+        'Custom integrations',
+        'Priority phone support'
+      ]
+    }
+  ];
 
   return (
     <div className="min-h-screen bg-white">
@@ -44,6 +163,9 @@ const LandingPage: React.FC = () => {
                 </a>
                 <a href="#services" className="text-white/80 hover:text-primary-400 font-medium transition-colors">
                   Services
+                </a>
+                <a href="#pricing" className="text-white/80 hover:text-primary-400 font-medium transition-colors">
+                  Pricing
                 </a>
                 <a href="#about" className="text-white/80 hover:text-primary-400 font-medium transition-colors">
                   About
@@ -93,6 +215,9 @@ const LandingPage: React.FC = () => {
                 </a>
                 <a href="#services" className="px-4 py-2 text-white/80 hover:text-primary-400 transition-colors">
                   Services
+                </a>
+                <a href="#pricing" className="px-4 py-2 text-white/80 hover:text-primary-400 transition-colors">
+                  Pricing
                 </a>
                 <a href="#about" className="px-4 py-2 text-white/80 hover:text-primary-400 transition-colors">
                   About
@@ -559,6 +684,129 @@ const LandingPage: React.FC = () => {
         </div>
       </section>
 
+      {/* Pricing Plans Section */}
+      <section className="py-20 bg-white" id="pricing">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Section Header */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+              Choose Your Growth Plan
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Transparent pricing designed to scale with your business. All plans include manual onboarding and dedicated support.
+            </p>
+          </motion.div>
+
+          {/* Plan Type Cards */}
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {/* Individual Plan Card */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              viewport={{ once: true }}
+              whileHover={{ y: -5, scale: 1.02 }}
+              className="bg-gradient-to-br from-blue-50 to-indigo-50 border-2 border-blue-200 rounded-2xl p-8 text-center hover:shadow-xl transition-all duration-300 cursor-pointer group"
+              onClick={() => handleViewPlans('individual')}
+            >
+              <div className="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-blue-200 transition-colors">
+                <User className="h-10 w-10 text-blue-600" />
+              </div>
+              
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Individual</h3>
+              <p className="text-gray-600 mb-6 leading-relaxed">
+                Perfect for freelancers, small contractors, and independent professionals looking to grow their client base.
+              </p>
+              
+              <div className="space-y-3 mb-8">
+                <div className="flex items-center justify-center text-sm text-gray-600">
+                  <Check className="h-4 w-4 text-green-500 mr-2" />
+                  <span>1 Service Listing</span>
+                </div>
+                <div className="flex items-center justify-center text-sm text-gray-600">
+                  <Check className="h-4 w-4 text-green-500 mr-2" />
+                  <span>Professional Profile</span>
+                </div>
+                <div className="flex items-center justify-center text-sm text-gray-600">
+                  <Check className="h-4 w-4 text-green-500 mr-2" />
+                  <span>Customer Reviews</span>
+                </div>
+              </div>
+              
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="w-full bg-blue-600 text-white py-3 px-6 rounded-xl font-semibold hover:bg-blue-700 transition-colors group-hover:shadow-lg"
+              >
+                View Individual Plans
+              </motion.button>
+              
+              <p className="text-xs text-gray-500 mt-4">
+                Starting from 10,000 FCFA/month
+              </p>
+            </motion.div>
+
+            {/* Business Plan Card */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+              whileHover={{ y: -5, scale: 1.02 }}
+              className="bg-gradient-to-br from-orange-50 to-amber-50 border-2 border-primary-200 rounded-2xl p-8 text-center hover:shadow-xl transition-all duration-300 cursor-pointer group relative overflow-hidden"
+              onClick={() => handleViewPlans('business')}
+            >
+              {/* Popular Badge */}
+              <div className="absolute top-0 right-0 bg-primary-500 text-white px-4 py-1 text-xs font-semibold transform rotate-12 translate-x-2 translate-y-2">
+                Popular
+              </div>
+              
+              <div className="w-20 h-20 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-primary-200 transition-colors">
+                <Briefcase className="h-10 w-10 text-primary-600" />  
+              </div>
+              
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Business</h3>
+              <p className="text-gray-600 mb-6 leading-relaxed">
+                Ideal for companies, contractors, and firms that want to showcase multiple services and manage teams.
+              </p>
+              
+              <div className="space-y-3 mb-8">
+                <div className="flex items-center justify-center text-sm text-gray-600">
+                  <Check className="h-4 w-4 text-green-500 mr-2" />
+                  <span>Unlimited Services</span>
+                </div>
+                <div className="flex items-center justify-center text-sm text-gray-600">
+                  <Check className="h-4 w-4 text-green-500 mr-2" />
+                  <span>Team Management</span>
+                </div>
+                <div className="flex items-center justify-center text-sm text-gray-600">
+                  <Check className="h-4 w-4 text-green-500 mr-2" />
+                  <span>Advanced Analytics</span>
+                </div>
+              </div>
+              
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="w-full bg-primary-500 text-white py-3 px-6 rounded-xl font-semibold hover:bg-primary-600 transition-colors group-hover:shadow-lg"
+              >
+                View Business Plans
+              </motion.button>
+              
+              <p className="text-xs text-gray-500 mt-4">
+                Starting from 25,000 FCFA/month
+              </p>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       {/* Newsletter Section with Fixed Background Parallax */}
       <section className="relative py-24 overflow-hidden">
         {/* Fixed Background Image */}
@@ -711,13 +959,132 @@ const LandingPage: React.FC = () => {
         />
       </section>
 
+      {/* Pricing Modal */}
+      {showPricingModal && selectedUserType && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
+          onClick={() => setShowPricingModal(false)}
+        >
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: 20 }}
+            onClick={(e) => e.stopPropagation()}
+            className="bg-white rounded-2xl shadow-2xl w-full max-w-6xl mx-auto max-h-[90vh] overflow-y-auto"
+          >
+            {/* Modal Header */}
+            <div className="sticky top-0 bg-white rounded-t-2xl border-b border-gray-200 p-6">
+              <div className="flex items-center justify-between">
+                <div className="text-center flex-1">
+                  <div className={`w-16 h-16 ${selectedUserType === 'individual' ? 'bg-blue-100' : 'bg-primary-100'} rounded-full flex items-center justify-center mx-auto mb-4`}>
+                    {selectedUserType === 'individual' ? (
+                      <User className={`h-8 w-8 ${selectedUserType === 'individual' ? 'text-blue-600' : 'text-primary-600'}`} />
+                    ) : (
+                      <Briefcase className="h-8 w-8 text-primary-600" />
+                    )}
+                  </div>
+                  <h2 className="text-2xl font-bold text-gray-900 mb-2">
+                    {selectedUserType === 'individual' ? 'Individual' : 'Business'} Plans
+                  </h2>
+                  <p className="text-gray-600">
+                    {selectedUserType === 'individual' 
+                      ? 'Perfect for freelancers and independent professionals'
+                      : 'Designed for companies and growing businesses'
+                    }
+                  </p>
+                </div>
+                <button
+                  onClick={() => setShowPricingModal(false)}
+                  className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+                >
+                  <X className="h-6 w-6 text-gray-500" />
+                </button>
+              </div>
+            </div>
+
+            {/* Pricing Cards */}
+            <div className="p-6">
+              <div className="grid md:grid-cols-3 gap-6">
+                {(selectedUserType === 'individual' ? individualPlans : businessPlans).map((plan, index) => (
+                  <motion.div
+                    key={plan.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                    className={`relative bg-white border-2 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 ${
+                      plan.popular 
+                        ? 'border-primary-500 ring-2 ring-primary-200' 
+                        : 'border-gray-200 hover:border-gray-300'
+                    }`}
+                  >
+                    {/* Popular Badge */}
+                    {plan.popular && (
+                      <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                        <div className="bg-primary-500 text-white px-4 py-1 rounded-full text-sm font-semibold">
+                          Most Popular
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Plan Header */}
+                    <div className="text-center mb-6">
+                      <h3 className="text-xl font-bold text-gray-900 mb-2">{plan.name}</h3>
+                      <p className="text-gray-600 text-sm mb-4">{plan.description}</p>
+                      <div className="mb-4">
+                        <span className="text-3xl font-bold text-gray-900">{plan.price}</span>
+                        <span className="text-gray-600 ml-1">FCFA/{plan.period}</span>
+                      </div>
+                    </div>
+
+                    {/* Features List */}
+                    <div className="space-y-3 mb-8">
+                      {plan.features.map((feature, featureIndex) => (
+                        <div key={featureIndex} className="flex items-start">
+                          <Check className="h-5 w-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
+                          <span className="text-gray-700 text-sm">{feature}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Select Button */}
+                    <motion.button
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      onClick={() => handleSelectPlan(plan.id)}
+                      className={`w-full py-3 px-4 rounded-xl font-semibold transition-colors ${
+                        plan.popular
+                          ? 'bg-primary-500 text-white hover:bg-primary-600'
+                          : 'bg-gray-100 text-gray-900 hover:bg-gray-200'
+                      }`}
+                    >
+                      Select {plan.name}
+                    </motion.button>
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* Features Comparison Note */}
+              <div className="mt-8 p-4 bg-gray-50 rounded-xl">
+                <p className="text-sm text-gray-600 text-center">
+                  <strong>Service Limitations:</strong> {selectedUserType === 'individual' ? 'Individual plans allow only 1 service listing' : 'Business plans include unlimited service listings'}. 
+                  All plans include profile creation, search visibility, and customer support.
+                </p>
+              </div>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+
       {/* Registration Modal */}
       <RegistrationModal
         isOpen={isRegistrationOpen}
         onClose={() => setIsRegistrationOpen(false)}
         onSuccess={() => {
           setIsRegistrationOpen(false);
-          navigate('/packages');
+          navigate('/payment');
         }}
       />
     </div>

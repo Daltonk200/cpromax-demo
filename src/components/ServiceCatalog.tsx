@@ -52,6 +52,18 @@ const ServiceCatalog: React.FC = () => {
   };
 
   const handleAddService = () => {
+    if (!currentUser) return;
+
+    // Check user plan limitations
+    const userPlanData = localStorage.getItem('userPlanData');
+    if (userPlanData) {
+      const planData = JSON.parse(userPlanData);
+      if (planData.userType === 'individual' && currentUser.services.length >= 1) {
+        toast.error('Individual plans are limited to 1 service. Upgrade to Business for unlimited services.');
+        return;
+      }
+    }
+
     resetForm();
     setEditingService(null);
     setShowAddModal(true);

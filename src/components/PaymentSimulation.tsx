@@ -46,6 +46,19 @@ const PaymentSimulation: React.FC<PaymentSimulationProps> = ({
   const navigate = useNavigate();
 
   const currentUser = getCurrentUser();
+  
+  // Get user plan data from localStorage
+  const getUserPlanData = () => {
+    const userPlanData = localStorage.getItem('userPlanData');
+    if (userPlanData) {
+      return JSON.parse(userPlanData);
+    }
+    return null;
+  };
+
+  const userPlan = getUserPlanData();
+  const actualSelectedPackage = userPlan?.selectedPlan || selectedPackage;
+  const userType = userPlan?.userType || 'business';
 
   // Mock payment methods based on country
   const getPaymentMethods = (): PaymentMethod[] => {
@@ -83,12 +96,20 @@ const PaymentSimulation: React.FC<PaymentSimulationProps> = ({
 
   const paymentMethods = getPaymentMethods();
 
-  const getPackagePrice = (packageId: string): string => {
-    const prices = {
-      basic: '15,000',
-      professional: '25,000',
-      premium: '50,000',
+  const getPackagePrice = (packageId: string, userType: string): string => {
+    const individualPrices = {
+      basic: '10,000',
+      professional: '18,000',
+      premium: '30,000',
     };
+    
+    const businessPrices = {
+      basic: '25,000',
+      professional: '40,000',  
+      premium: '70,000',
+    };
+    
+    const prices = userType === 'individual' ? individualPrices : businessPrices;
     return prices[packageId as keyof typeof prices] || '25,000';
   };
 
@@ -114,10 +135,10 @@ const PaymentSimulation: React.FC<PaymentSimulationProps> = ({
       const updatedUser = {
         ...currentUser,
         status: 'active' as const,
-        package: selectedPackage as any,
+        package: actualSelectedPackage as any,
         subscription: {
           isActive: true,
-          package: selectedPackage,
+          package: actualSelectedPackage,
           startDate: startDate.toISOString(),
           endDate: endDate.toISOString(),
         },
@@ -280,6 +301,25 @@ const PaymentSimulation: React.FC<PaymentSimulationProps> = ({
     );
   }
 
+  // Redirect to home if no plan is selected
+  if (!userPlan && !selectedPackage) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-neutral-50 to-neutral-100 flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold text-neutral-900 mb-4">
+            Please select a plan first
+          </h1>
+          <button
+            onClick={() => navigate('/')}
+            className="px-6 py-3 bg-primary-500 text-white  hover:bg-primary-600 transition-colors"
+          >
+            Choose Your Plan
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-neutral-50 to-neutral-100">
       {/* Header */}
@@ -288,7 +328,7 @@ const PaymentSimulation: React.FC<PaymentSimulationProps> = ({
           <div className="text-center">
             <h1 className="text-3xl font-bold text-neutral-900">Complete Payment</h1>
             <p className="mt-2 text-lg text-neutral-600">
-              Secure your {selectedPackage} package subscription
+              Secure your {actualSelectedPackage} {userType} plan subscription
             </p>
           </div>
         </div>
@@ -309,9 +349,9 @@ const PaymentSimulation: React.FC<PaymentSimulationProps> = ({
             
             <div className="space-y-4">
               <div className="flex justify-between items-center py-3 border-b border-neutral-200">
-                <span className="text-neutral-700">{selectedPackage} Package</span>
+                <span className="text-neutral-700">{actualSelectedPackage} {userType} Plan</span>
                 <span className="font-semibold text-neutral-900">
-                  {formatCurrency(getPackagePrice(selectedPackage))}
+                  {formatCurrency(getPackagePrice(actualSelectedPackage, userType))}
                 </span>
               </div>
               
@@ -328,7 +368,7 @@ const PaymentSimulation: React.FC<PaymentSimulationProps> = ({
               <div className="flex justify-between items-center py-4 bg-primary-50  px-4">
                 <span className="text-lg font-semibold text-neutral-900">Total</span>
                 <span className="text-xl font-bold text-primary-600">
-                  {formatCurrency(getPackagePrice(selectedPackage))}
+                  {formatCurrency(getPackagePrice(actualSelectedPackage, userType))}
                 </span>
               </div>
             </div>
@@ -441,7 +481,7 @@ const PaymentSimulation: React.FC<PaymentSimulationProps> = ({
                           Payment Amount
                         </h3>
                         <div className="text-2xl font-bold text-primary-500">
-                          {formatCurrency(getPackagePrice(selectedPackage))}
+                          {formatCurrency(getPackagePrice(actualSelectedPackage, userType))}
                         </div>
                       </div>
 
@@ -466,7 +506,7 @@ const PaymentSimulation: React.FC<PaymentSimulationProps> = ({
                             <span>Processing Payment...</span>
                           </div>
                         ) : (
-                          `Pay ${formatCurrency(getPackagePrice(selectedPackage))}`
+                          `Pay ${formatCurrency(getPackagePrice(actualSelectedPackage, userType))}`
                         )}
                       </motion.button>
                     </div>
