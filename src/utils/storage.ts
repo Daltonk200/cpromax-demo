@@ -1,4 +1,4 @@
-import type { AppData, User, RegistrationData, Service } from '../types';
+import type { AppData, User, RegistrationData, Service, BusinessProfile } from '../types';
 
 const STORAGE_KEY = 'cipromart_data';
 
@@ -170,4 +170,14 @@ export const validatePhone = (phone: string): boolean => {
 
 export const validatePassword = (password: string): boolean => {
   return password.length >= 6;
+};
+
+// Business Profile management functions
+export const getBusinessProfile = (): { businessProfile: BusinessProfile } | null => {
+  const data = localStorage.getItem('businessProfile');
+  return data ? JSON.parse(data) : null;
+};
+
+export const saveBusinessProfile = (profile: BusinessProfile): void => {
+  localStorage.setItem('businessProfile', JSON.stringify({ businessProfile: profile }));
 };

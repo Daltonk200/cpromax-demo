@@ -71,3 +71,12 @@ export interface PaymentMethod {
   icon: string;
   available: boolean;
 }
+
+export interface BusinessProfile {
+  logo: string;
+  description: string;
+  phone: string;
+  email: string;
+  whatsapp: string | null;
+  serviceAreas: string[];
+}
