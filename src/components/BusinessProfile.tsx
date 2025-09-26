@@ -7,6 +7,18 @@ import { getCurrentUser, updateUser, calculateProfileCompletion } from '../utils
 const BusinessProfile: React.FC = () => {
   const currentUser = getCurrentUser();
   const [isLoading, setIsLoading] = useState(false);
+
+  // Get user type from localStorage
+  const getUserType = (): 'individual' | 'business' => {
+    const userPlanData = localStorage.getItem('userPlanData');
+    if (userPlanData) {
+      const planData = JSON.parse(userPlanData);
+      return planData.userType || 'business';
+    }
+    return 'business';
+  };
+
+  const userType = getUserType();
   const [profileData, setProfileData] = useState({
     logoUrl: '',
     description: '',
@@ -45,7 +57,7 @@ const BusinessProfile: React.FC = () => {
       // For demo, we'll just use a placeholder URL
       const logoUrl = URL.createObjectURL(file);
       setProfileData(prev => ({ ...prev, logoUrl }));
-      toast.success('Logo uploaded successfully!');
+      toast.success(`${userType === 'individual' ? 'Profile picture' : 'Logo'} uploaded successfully!`);
     }
   };
 
@@ -133,14 +145,14 @@ const BusinessProfile: React.FC = () => {
         className="bg-white rounded-xl shadow-lg p-6"
       >
         <h2 className="text-xl font-semibold text-neutral-900 mb-6">
-          Business Profile
+          {userType === 'individual' ? 'Individual Profile' : 'Business Profile'}
         </h2>
 
         <div className="space-y-6">
           {/* Logo Upload */}
           <div>
             <label className="block text-sm font-medium text-neutral-700 mb-2">
-              Business Logo
+              {userType === 'individual' ? 'Profile Picture' : 'Business Logo'}
             </label>
             <div className="flex items-center space-x-4">
               <div className="w-20 h-20 bg-neutral-100 rounded-full flex items-center justify-center overflow-hidden">
@@ -175,17 +187,20 @@ const BusinessProfile: React.FC = () => {
             </div>
           </div>
 
-          {/* Business Description */}
+          {/* Description */}
           <div>
             <label className="block text-sm font-medium text-neutral-700 mb-2">
-              Business Description
+              {userType === 'individual' ? 'About You' : 'Business Description'}
             </label>
             <textarea
               value={profileData.description}
               onChange={(e) => handleInputChange('description', e.target.value)}
               rows={4}
               className="w-full px-4 py-3 border border-neutral-300  focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-white text-neutral-900 placeholder-neutral-500"
-              placeholder="Describe your business, services, and what makes you unique..."
+              placeholder={userType === 'individual' 
+                ? 'Describe yourself, your skills, and what makes you unique...'
+                : 'Describe your business, services, and what makes you unique...'
+              }
             />
           </div>
 

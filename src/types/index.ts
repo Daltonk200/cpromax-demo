@@ -1,6 +1,7 @@
 export interface User {
   id: string;
-  businessName: string;
+  name?: string;           // For individual users
+  businessName?: string;   // For business users
   email: string;
   phone: string;
   password: string;
@@ -49,7 +50,8 @@ export interface AppData {
 }
 
 export interface RegistrationData {
-  businessName: string;
+  name?: string;           // For individual users
+  businessName?: string;   // For business users  
   email: string;
   phone: string;
   password: string;

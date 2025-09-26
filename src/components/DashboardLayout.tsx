@@ -49,6 +49,28 @@ const DashboardLayout: React.FC = () => {
 
   const profileCompletion = calculateProfileCompletion(currentUser);
 
+  // Get user type from localStorage
+  const getUserType = (): 'individual' | 'business' => {
+    const userPlanData = localStorage.getItem('userPlanData');
+    if (userPlanData) {
+      const planData = JSON.parse(userPlanData);
+      return planData.userType || 'business';
+    }
+    return 'business';
+  };
+
+  const userType = getUserType();
+  
+  // Get display name based on user type
+  const getDisplayName = (): string => {
+    if (userType === 'individual' && currentUser.name) {
+      return currentUser.name;
+    } else if (userType === 'business' && currentUser.businessName) {
+      return currentUser.businessName;
+    }
+    return 'User';
+  };
+
   const menuItems = [
     { id: 'overview', label: 'Overview', icon: Home },
     { id: 'profile', label: 'Business Profile', icon: Building2 },
@@ -79,7 +101,7 @@ const DashboardLayout: React.FC = () => {
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-2xl font-bold text-neutral-900">
-              Welcome back, {currentUser.businessName}!
+              Welcome back, {getDisplayName()}!
             </h1>
             <p className="text-neutral-600 mt-1">
               Manage your business profile and services

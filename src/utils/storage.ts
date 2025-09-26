@@ -40,6 +40,7 @@ export const generateId = (): string => {
 export const createUser = (registrationData: RegistrationData): User => {
   const newUser: User = {
     id: generateId(),
+    name: registrationData.name,
     businessName: registrationData.businessName,
     email: registrationData.email,
     phone: registrationData.phone,

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Mail, Lock, Building2, Phone, Globe } from 'lucide-react';
+import { X, Mail, Lock, Building2, Phone, Globe, User } from 'lucide-react';
 import { toast } from 'sonner';
 import { createUser, setCurrentUser } from '../utils/storage';
 import { validateEmail, validatePhone, validatePassword } from '../utils/storage';
@@ -18,7 +18,20 @@ const RegistrationModal: React.FC<RegistrationModalProps> = ({
   onClose,
   onSuccess,
 }) => {
+  // Get user type from localStorage
+  const getUserType = (): 'individual' | 'business' => {
+    const userPlanData = localStorage.getItem('userPlanData');
+    if (userPlanData) {
+      const planData = JSON.parse(userPlanData);
+      return planData.userType || 'business';
+    }
+    return 'business';
+  };
+
+  const userType = getUserType();
+
   const [formData, setFormData] = useState<RegistrationData>({
+    name: '',
     businessName: '',
     email: '',
     phone: '',
@@ -40,8 +53,14 @@ const RegistrationModal: React.FC<RegistrationModalProps> = ({
   const validateForm = (): boolean => {
     const newErrors: Partial<RegistrationData> = {};
 
-    if (!formData.businessName.trim()) {
-      newErrors.businessName = 'Business name is required';
+    if (userType === 'individual') {
+      if (!formData.name?.trim()) {
+        newErrors.name = 'Name is required';
+      }
+    } else {
+      if (!formData.businessName?.trim()) {
+        newErrors.businessName = 'Business name is required';
+      }
     }
 
     if (!formData.email.trim()) {
@@ -89,10 +108,26 @@ const RegistrationModal: React.FC<RegistrationModalProps> = ({
       // Set the current user session
       setCurrentUser(newUser.id);
       
-      toast.success('Registration successful! Please select your package.');
+      // Save registration data to localStorage
+      const registrationDataToSave = {
+        userType,
+        registrationData: {
+          name: userType === 'individual' ? formData.name : undefined,
+          businessName: userType === 'business' ? formData.businessName : undefined,
+          email: formData.email,
+          phone: formData.phone,
+          country: formData.country
+        },
+        subscriptionStatus: 'pending' as const
+      };
+      
+      localStorage.setItem('userRegistrationData', JSON.stringify(registrationDataToSave));
+      
+      toast.success('Registration successful! Proceeding to payment...');
       
       // Reset form
       setFormData({
+        name: '',
         businessName: '',
         email: '',
         phone: '',
@@ -111,6 +146,7 @@ const RegistrationModal: React.FC<RegistrationModalProps> = ({
   const handleClose = () => {
     if (!isSubmitting) {
       setFormData({
+        name: '',
         businessName: '',
         email: '',
         phone: '',
@@ -146,14 +182,21 @@ const RegistrationModal: React.FC<RegistrationModalProps> = ({
               <div className="flex items-center justify-between p-6 border-b border-neutral-200">
                 <div className="flex items-center space-x-3">
                   <div className="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center">
-                    <Building2 className="h-5 w-5 text-primary-500" />
+                    {userType === 'individual' ? (
+                      <User className="h-5 w-5 text-primary-500" />
+                    ) : (
+                      <Building2 className="h-5 w-5 text-primary-500" />
+                    )}
                   </div>
                   <div>
                     <h2 className="text-xl font-semibold text-neutral-900">
                       Join CiproMart
                     </h2>
                     <p className="text-sm text-neutral-600">
-                      Create your business account
+                      {userType === 'individual' 
+                        ? 'Create your Individual account'
+                        : 'Create your Business account'
+                      }
                     </p>
                   </div>
                 </div>
@@ -168,26 +211,35 @@ const RegistrationModal: React.FC<RegistrationModalProps> = ({
 
               {/* Form */}
               <form onSubmit={handleSubmit} className="p-6 space-y-4">
-                {/* Business Name */}
+                {/* Dynamic Name/Business Name Field */}
                 <div>
                   <label className="block text-sm font-medium text-neutral-700 mb-2">
-                    Business Name
+                    {userType === 'individual' ? 'Full Name' : 'Business Name'}
                   </label>
                   <div className="relative">
-                    <Building2 className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-neutral-400" />
+                    {userType === 'individual' ? (
+                      <User className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-neutral-400" />
+                    ) : (
+                      <Building2 className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-neutral-400" />
+                    )}
                     <input
                       type="text"
-                      value={formData.businessName}
-                      onChange={(e) => handleInputChange('businessName', e.target.value)}
+                      value={userType === 'individual' ? (formData.name || '') : (formData.businessName || '')}
+                      onChange={(e) => handleInputChange(
+                        userType === 'individual' ? 'name' : 'businessName', 
+                        e.target.value
+                      )}
                       className={`w-full pl-10 pr-4 py-3 border  focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-white text-neutral-900 placeholder-neutral-500 ${
-                        errors.businessName ? 'border-red-300' : 'border-neutral-300'
+                        (userType === 'individual' ? errors.name : errors.businessName) ? 'border-red-300' : 'border-neutral-300'
                       }`}
-                      placeholder="Enter your business name"
+                      placeholder={userType === 'individual' ? 'Enter your name' : 'Enter your business name'}
                       disabled={isSubmitting}
                     />
                   </div>
-                  {errors.businessName && (
-                    <p className="mt-1 text-sm text-red-600">{errors.businessName}</p>
+                  {(userType === 'individual' ? errors.name : errors.businessName) && (
+                    <p className="mt-1 text-sm text-red-600">
+                      {userType === 'individual' ? errors.name : errors.businessName}
+                    </p>
                   )}
                 </div>
 

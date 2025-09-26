@@ -572,7 +572,7 @@ const PaymentSimulation: React.FC<PaymentSimulationProps> = ({
                 transition={{ delay: 0.7 }}
                 className="text-neutral-600"
               >
-                Please bear with us a little longer — let's set up your business profile.
+                Please bear with us a little longer — let's set up your {userType} profile.
               </motion.p>
             </div>
           </motion.div>
@@ -601,7 +601,10 @@ const PaymentSimulation: React.FC<PaymentSimulationProps> = ({
                     <Building2 className="h-8 w-8 text-primary-600" />
                   </div>
                   <h2 className="text-2xl font-bold text-neutral-900 mb-2">
-                    Set Up Your Business Profile
+                    {userType === 'individual' 
+                      ? 'Set Up Your Individual Profile'
+                      : 'Set Up Your Business Profile'
+                    }
                   </h2>
                   <p className="text-neutral-600">
                     Complete your profile to start attracting customers
@@ -615,14 +618,14 @@ const PaymentSimulation: React.FC<PaymentSimulationProps> = ({
                 <div>
                   <label className="block text-sm font-medium text-neutral-900 mb-2">
                     <Upload className="h-4 w-4 inline mr-2" />
-                    Business Logo
+                    {userType === 'individual' ? 'Profile Picture' : 'Business Logo'}
                   </label>
                   <div className="border-2 border-dashed border-neutral-300 rounded-xl p-6 text-center hover:border-primary-400 transition-colors">
                     {profileData.logo ? (
                       <div className="space-y-4">
                         <img
                           src={profileData.logo}
-                          alt="Business logo"
+                          alt={userType === 'individual' ? 'Profile picture' : 'Business logo'}
                           className="w-24 h-24 object-cover rounded-xl mx-auto"
                         />
                         <button
@@ -636,7 +639,7 @@ const PaymentSimulation: React.FC<PaymentSimulationProps> = ({
                       <div>
                         <Upload className="h-12 w-12 text-neutral-400 mx-auto mb-4" />
                         <p className="text-neutral-600 mb-2">
-                          Upload your business logo (JPG/PNG, max 2MB)
+                          Upload your {userType === 'individual' ? 'profile picture' : 'business logo'} (JPG/PNG, max 2MB)
                         </p>
                         <input
                           type="file"
@@ -660,12 +663,15 @@ const PaymentSimulation: React.FC<PaymentSimulationProps> = ({
                 <div>
                   <label className="block text-sm font-medium text-neutral-900 mb-2">
                     <FileText className="h-4 w-4 inline mr-2" />
-                    Business Description
+                    {userType === 'individual' ? 'About You' : 'Business Description'}
                   </label>
                   <textarea
                     value={profileData.description}
                     onChange={(e) => handleProfileInputChange('description', e.target.value)}
-                    placeholder="Describe your business, services, and what makes you unique..."
+                    placeholder={userType === 'individual' 
+                      ? 'Describe yourself, your skills, and what makes you unique...'
+                      : 'Describe your business, services, and what makes you unique...'
+                    }
                     rows={4}
                     className="w-full px-4 py-3 border border-neutral-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent resize-none"
                   />
