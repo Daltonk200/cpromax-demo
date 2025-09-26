@@ -960,7 +960,8 @@ const LandingPage: React.FC = () => {
       </section>
 
       {/* Pricing Modal */}
-      {showPricingModal && selectedUserType && (
+      <AnimatePresence>
+        {showPricingModal && selectedUserType && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -1076,7 +1077,8 @@ const LandingPage: React.FC = () => {
             </div>
           </motion.div>
         </motion.div>
-      )}
+        )}
+      </AnimatePresence>
 
       {/* Registration Modal */}
       <RegistrationModal
